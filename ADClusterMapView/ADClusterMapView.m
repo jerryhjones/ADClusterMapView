@@ -108,7 +108,12 @@
 }
 
 - (void)selectAnnotation:(id<MKAnnotation>)annotation animated:(BOOL)animated {
-    [super selectAnnotation:[self clusterAnnotationForOriginalAnnotation:annotation] animated:animated];
+    ADClusterAnnotation *cluster = [self clusterAnnotationForOriginalAnnotation:annotation];
+    if (cluster) {
+        [self selectClusterAnnotation:cluster animated:animated];
+    } else {
+        [super selectAnnotation:annotation animated:animated];
+    }
 }
 
 - (void)selectClusterAnnotation:(ADClusterAnnotation *)annotation animated:(BOOL)animated {
